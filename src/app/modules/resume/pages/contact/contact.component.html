@@ -1,0 +1,125 @@
+<ng-container *ngIf="{
+  sending : sending$ | async,
+  loading: loading$ | async,
+  info: info$ | async
+} as view">
+
+
+  <section class="contact fullscreen-section pb-3" id="contact">
+
+    <div class="container">
+      <div class="item-head center mb-5  wow animate__zoomIn" data-wow-delay="0s">
+        <h4 class="subtitle"><span>/</span> Contact</h4>
+        <h2 class="title"><span></span> Get In Touch</h2>
+      </div>
+
+      <div class="row no-gutters">
+        <div class="col-xl-6">
+          <div class="card no-bg h-100 wow animate__fadeIn" data-wow-delay="0.3s">
+            <div class="card-body">
+
+              <app-loader *ngIf="view.loading" class="fullpage-loader"></app-loader>
+
+              <div class="d-block" *ngIf="!view.loading && view.info">
+
+                <div class="wow animate__zoomIn" data-wow-delay="0.4s">
+                  <div class="contact-title">
+                    &lt; Email Address &gt;
+                  </div>
+                  <p>{{view.info.email_address | emailMask}}</p>
+                </div>
+
+                <div class="wow animate__zoomIn" data-wow-delay="0.6s">
+                  <div class="contact-title">
+                    &lt; Phone Number &gt;
+                  </div>
+                  <p>{{view.info.phone_number}}</p>
+                </div>
+
+                <div class="wow animate__zoomIn" data-wow-delay="0.8s">
+                  <div class="contact-title">
+                    &lt; Address &gt;
+                  </div>
+                  <p>{{view.info.address}}</p>
+                </div>
+
+                <div class="social-links dark mt-5 wow animate__zoomIn">
+                  <a *ngFor="let item of view.info.social" [href]="item.link" target="_blank">
+                    <span class="mdi {{ item.icon }}"></span>
+                  </a>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-6">
+          <div class="card no-bg text-white h-100">
+            <div class="card-body no-bg">
+              <div class="contact-title wow animate__fadeIn" data-wow-delay="0.5s">
+                &lt; Send me a message &gt;
+              </div>
+              <form #contactForm="ngForm" (ngSubmit)="submit()" class="contact-form wow animate__fadeIn" method="post"
+                accept-charset="utf-8" role="form" data-wow-delay="1s">
+
+                <div class="row">
+                  <div class="col-md-6 col-12 form-group">
+                    <div class="modern-input">
+                      <input type="text" class="form-control no-bg" id="contactSubject" name="contactSubject" required
+                        [(ngModel)]="fInputSubject" #inputSubject="ngModel"
+                        [ngClass]="{'is-invalid': inputSubject.invalid && (inputSubject.dirty || inputSubject.touched)}">
+                      <span>Subject</span>
+                    </div>
+                    <div *ngIf="inputSubject.invalid && (inputSubject.dirty || inputSubject.touched)"
+                      class="invalid-feedback">
+                      <span *ngIf="inputSubject.errors?.['required']">Please enter a subject.</span>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-12 form-group">
+                    <div class="modern-input">
+                      <input type="text" class="form-control no-bg" id="contactEmail" name="contactEmail" required
+                        [(ngModel)]="fInputEmail" #inputEmail="ngModel"
+                        [ngClass]="{'is-invalid': inputEmail.invalid && (inputEmail.dirty || inputEmail.touched)}">
+                      <span>Email Address</span>
+                    </div>
+
+                    <div *ngIf="inputEmail.invalid && (inputEmail.dirty || inputEmail.touched)"
+                      class="invalid-feedback">
+                      <span *ngIf="inputEmail.errors?.['required']">Email field is required.</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="modern-input">
+                    <textarea type="text" class="form-control no-bg" id="contactMessage" name="contactMessage"
+                      style="height: 160px;" required [(ngModel)]="fInputMessage" #inputMessage="ngModel"
+                      [ngClass]="{'is-invalid': inputMessage.invalid && (inputMessage.dirty || inputMessage.touched)}"></textarea>
+                    <span>Your message</span>
+                  </div>
+
+                  <div *ngIf="inputMessage.invalid && (inputMessage.dirty || inputMessage.touched)"
+                    class="invalid-feedback">
+                    <span *ngIf="inputMessage.errors?.['required']">Message cannot be empty.</span>
+                  </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary submit_button" [disabled]="contactForm.invalid">
+                  <span class="mdi" [ngClass]="{
+                    'mdi-telegram': !view.sending, 
+                    'mdi-spin mdi-loading': view.sending 
+                  }">
+                  </span>
+                  Send!
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+</ng-container>
+
+<app-footer></app-footer>

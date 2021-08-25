@@ -1,0 +1,121 @@
+<ng-container *ngIf="{
+  loading: loading$ | async,
+  project: project$ | async,
+  nextProject: nextProject$ | async,
+  previousProject: previousProject$ | async  
+} as view">
+  <app-loader *ngIf="view.loading" class="fullpage-loader"></app-loader>
+
+
+  <section class="portfolio fullscreen-section pb-4" id="portfolio-view"
+    *ngIf="!view.loading && view.project as project">
+    <div class="container">
+      <div class="content">
+        <div class="item-head wow animate__zoomIn mb-5" data-wow-delay="0s">
+          <h4 class="subtitle d-flex">
+            <span class="me-auto"><span>/</span> Project Preview</span>
+            <a routerLink="/portfolio" class="btn btn-sm btn-outline-primary px-3" placement="top"
+              ngbTooltip="Go back to Portfolio">
+              <i class="mdi mdi-chevron-left"></i>
+            </a>
+          </h4>
+          <div class="d-flex justify-content-between align-items-center">
+            <h2 class="title"><span></span> {{project.name}}</h2>
+            <a *ngIf="project.demo_link" href="{{project.demo_link}}" target="_blank" rel="{{project.name}} project link"
+              class="btn btn-sm btn-primary px-3" placement="top" ngbTooltip="View the project's demo/images link">
+              View Demo
+            </a>
+          </div>
+        </div>
+
+        <ngb-carousel *ngIf="project.images.length > 0" [showNavigationArrows]="project.images.length > 2"
+          [showNavigationIndicators]="false" class="project-slider text-center wow animate__fadeIn"
+          data-wow-delay="0.3s">
+          <ng-template ngbSlide *ngFor="let image of project.images.slice(1); let i = index;">
+            <div class="picsum-img-wrapper">
+              <img [src]="image" alt="{{project.name}} preview image {{i + 1}}" class="img-fluid">
+            </div>
+          </ng-template>
+        </ngb-carousel>
+
+        <div class="project-info mb-4 wow animate__fadeIn" data-wow-delay="0.6s">
+
+          <div class="row">
+            <div class="col-md-6 col-12 mb-3">
+              <div>
+                <h6 class="m-0 text-muted small fw-bold text-uppercase">Name:</h6>
+                <span>{{project.name}}</span>
+              </div>
+            </div>
+            <div class="col-md-6 col-12 mb-3">
+              <div>
+                <h6 class="m-0 text-muted small fw-bold text-uppercase">Project Link:</h6>
+                <span><a href="{{project.demo_link}}" target="_blank"
+                    rel="{{project.name}} project link">{{project.name}} Preview Link</a></span>
+              </div>
+            </div>
+            <div class="col-md-6 col-12 mb-3">
+              <div>
+                <h6 class="m-0 text-muted small fw-bold text-uppercase">Categories:</h6>
+                <p class="m-0">
+                  <span *ngFor="let category of project.categories; let i = index">
+                    <span *ngIf="i > 0">, </span> <span>{{categories[category]}}</span>
+                  </span>
+                </p>
+              </div>
+            </div>
+            <div class="col-md-6 col-12 mb-3">
+              <div>
+                <h6 class="m-0 text-muted small fw-bold text-uppercase">Client:</h6>
+                <span>{{project.client}}</span>
+              </div>
+            </div>
+            <div class="col-md-6 col-12 mb-3">
+              <div>
+                <h6 class="m-0 text-muted small fw-bold text-uppercase">Programming Languages & Technologies:</h6>
+                <p class="m-0 text-capitalize">
+                  <span *ngFor="let language of project.languages; let i = index">
+                    <span *ngIf="i > 0">, </span> <span>{{language}}</span>
+                  </span>
+                </p>
+              </div>
+            </div>
+            <div class="col-12 mb-3">
+              <div>
+                <h6 class="m-0 text-muted small fw-bold text-uppercase">Description:</h6>
+                <span [innerHTML]="project.description"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="projects-link row justify-content-between wow animate__fadeIn" data-wow-delay="0.3s">
+
+          <div class="previous-project col-lg-auto col-12 mb-3">
+            <a *ngIf="view.nextProject as project" routerLink="/portfolio/view/{{project.slug}}"
+              class="btn btn-block btn-outline-primary d-flex justify-content-center align-items-center">
+              <span class="mdi mdi-36px mdi-chevron-left me-2"></span>
+              <h6 class=" m-0">
+                {{project.name}}
+                <span class="d-block small text-left text-muted"> Previous Project</span>
+              </h6>
+            </a>
+          </div>
+
+          <div class="next-project col-lg-auto col-12 mb-3">
+            <a *ngIf="view.previousProject as project" routerLink="/portfolio/view/{{project.slug}}"
+              class="btn btn-block btn-outline-primary d-flex justify-content-center align-items-center">
+              <h6 class=" m-0">
+                {{project.name}}
+                <span class="d-block small text-right text-muted"> Next Project</span>
+              </h6>
+              <span class="mdi mdi-36px mdi-chevron-right ms-2"></span>
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+</ng-container>

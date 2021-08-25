@@ -1,0 +1,32 @@
+.about {
+  position: relative;
+
+  .personal-image {
+    display: inline-block;
+    width: auto;
+    margin: 0 auto;
+    position: relative;
+    margin-bottom: 3rem;
+
+    &::before {
+      content: '';
+      display: block;
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      left: -10%;
+      top: -8%;
+      background: var(--dhs-primary);
+      background: radial-gradient(circle, #5340FF 30%, #9b4edf 100%);
+      z-index: 1;
+    }
+
+    img {
+      position: relative;
+      z-index: 2;
+      display: block;
+      min-width: 400px;
+      min-height: 552px;
+    }
+  }
+}

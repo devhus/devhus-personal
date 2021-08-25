@@ -1,0 +1,35 @@
+.contact {
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    padding: 44px;
+    -ms-flex-pack: center !important;
+    -webkit-box-pack: center !important;
+    justify-content: center !important;
+    -ms-flex-direction: column !important;
+
+    .contact-title {
+      font-weight: 700;
+      font-size: 1.5rem;
+      position: relative;
+      margin-top: 8px;
+
+    }
+
+    p {
+      margin-bottom: 16px;
+    }
+
+    .contact-form {
+      margin-top: 2rem;
+    }
+  }
+
+  .form-control {
+    padding: 1rem;
+
+    &:focus {
+      color: var(--dhs-light);
+    }
+  }
+}

@@ -1,0 +1,40 @@
+.loader-body {
+  display: flex;
+  width: 100%;
+  height: auto;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+  //font-size: 2rem;
+  line-height: 1;
+
+  // &.size-xl {
+  //   font-size: 4rem;
+  // }
+
+  // &.size-lg {
+  //   font-size: 3rem;
+  // }
+
+  // &.size-sm {
+  //   font-size: 1rem;
+  // }
+
+  .load-icon {
+    position: absolute;
+    color: var(--dhs-primary);
+  }
+
+  .bg-icon {
+    position: relative;
+    color: var(--dhs-primary);
+    opacity: 0.4;
+  }
+
+  &.inline-body {
+    display: inline-flex;
+    width: auto;
+    padding: 0;
+  }
+}

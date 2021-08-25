@@ -1,0 +1,37 @@
+<header id="site-header" class="">
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand" routerLink="">
+        <img class="light-logo" src="{{ 'appUrl' | env}}/assets/image/devhus_logo.png" title="devhus logo"
+          placement="bottom" ngbTooltip="Sr. Software Developer" />
+        <img class="dark-logo" src="{{ 'appUrl' | env}}/assets/image/devhus_logo_dark.png" title="devhus logo" />
+      </a>
+
+      <button class="navbar-toggler text-white" id="navbar-toggler" type="button" (click)="toggleMobileMenu()">
+        <span class="mdi mdi-menu"></span>
+      </button>
+
+      <div class="collapse navbar-collapse navbar-toggler p-0" id="webNavbar">
+        <div class="mobile-mask animate__animated animate__fadeIn" (click)="toggleMobileMenu()"></div>
+        <ul class="navbar-nav  animate__animated animate__slideInRight">
+          <li class="nav-item" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact: true}">
+            <a class="nav-link " [routerLink]="''" [routerLinkActive]="'active'"
+              [routerLinkActiveOptions]="{exact: true}">Intro</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]="'active'">
+            <a class="nav-link " [routerLink]="'about'" [routerLinkActive]="'active'">About</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]="'active'">
+            <a class="nav-link " [routerLink]="'portfolio'" [routerLinkActive]="'active'">Portfolio</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]="'active'">
+            <a class="nav-link " [routerLink]="'resume'" [routerLinkActive]="'active'">Resume</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]="'active'">
+            <a class="nav-link " [routerLink]="'contact'" [routerLinkActive]="'active'">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>

@@ -1,0 +1,69 @@
+<ng-container *ngIf="{
+  loading: loading$ | async,
+  info: info$ | async
+} as view">
+
+  <app-loader *ngIf="view.loading" class="fullpage-loader"></app-loader>
+
+  <section class="about fullscreen-section" id="about" *ngIf="!view.loading && view.info">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-6 d-flex align-items-center flex-column justify-content-center">
+          <div class="personal-image wow animate__fadeInLeft" data-wow-delay="0.0s">
+            <img class="wow animate__fadeInUp" data-wow-delay="0.3s"
+              src="{{ 'appUrl' | env}}/assets/image/profile_picture.jpg" title="devhus personal image" />
+          </div>
+        </div>
+        <div class="col-xl-6 d-flex align-items-center flex-column justify-content-center">
+          <div class="content w-100">
+            <div class="item-head wow animate__fadeIn" data-wow-delay="0.3s">
+              <h4 class="subtitle"><span>/</span> About Me</h4>
+              <h2 class="title"><span></span> Hello, I am {{view.info.fullName}}.</h2>
+            </div>
+            <div class="about-texts mb-4 wow animate__fadeIn" data-wow-delay="0.6s">
+              <p>
+                {{view.info.description}}
+              </p>
+              <div class="row row no-gutters">
+                <div class="col-sm-6 col-12">
+                  <p><span class="fw-bold">Full Name:</span> {{view.info.fullName}}</p>
+                  <p><span class="fw-bold">Experience:</span> {{view.info.experienceYears}} Years <small
+                      class="text-muted">(Web)</small>, {{desktopExperienceYears}}
+                    Years <small class="text-muted">(Desktop)</small></p>
+                </div>
+                <div class="col-sm-auto col-12">
+                  <p><span class="fw-bold">Phone:</span> {{view.info.phone_number}}</p>
+                  <p><span class="fw-bold">Email:</span> {{view.info.email_address | emailMask}}</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="row mb-5 no-gutters wow animate__fadeIn" data-wow-delay="1s" style="visibility: hidden;">
+              <div class="col mb-3">
+                <a href="{{view.info.cv_link}}" target="_blank" download="{{view.info.cv_file}}"
+                  class="btn btn-primary">Download My CV</a>
+              </div>
+              <div class="col-12 col-lg-auto mb-3">
+                <div class="social-links">
+                  <a *ngFor="let item of view.info.social" [href]="item.link" target="_blank">
+                    <span class="mdi {{ item.icon }}"></span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="row wow animate__fadeIn" data-wow-delay="1.3s">
+              <div class="col-auto d-flex justify-content-center align-items-center"
+                *ngFor="let skill of view.info.skills; let i = index;">
+                <span class="mdi {{skill.icon}} me-2 mdi-24px icon"></span>
+                <span>{{skill.name}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+</ng-container>

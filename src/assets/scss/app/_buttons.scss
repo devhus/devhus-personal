@@ -1,0 +1,19 @@
+.btn {
+  padding: 0.5rem 2rem;
+  border-radius: 0;
+
+  &.disabled,
+  &:disabled {
+    cursor: no-drop;
+    color: #ffffff73;
+  }
+
+  &.btn-sm,
+  &.btn-group-sm>.btn {
+    padding: 0.25rem 1rem;
+  }
+}
+
+.clickable{
+  cursor: pointer;
+}

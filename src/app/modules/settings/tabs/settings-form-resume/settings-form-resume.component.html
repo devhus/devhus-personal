@@ -1,0 +1,161 @@
+<ng-container *ngIf="{
+  loading: loading$ | async,
+  experienceSections: experienceSections$ | async,
+  skillSections: skillSections$ | async
+} as view">
+
+  <app-loader *ngIf="view.loading"></app-loader>
+
+  <form #theForm="ngForm" *ngIf="!view.loading">
+
+    <div class="d-flex justify-content-between mb-3">
+      <h6>Experiences</h6>
+      <button class="btn btn-outline-dark btn-sm" (click)="add('experience')">add</button>
+    </div>
+
+    <div class="mb-4">
+      <ng-container *ngFor="let section of view.experienceSections; let i = index">
+        <hr *ngIf="i > 0">
+
+        <div class="card mb-1 clickable" (click)="activeId === 'experience-' + i ? activeId = '' : activeId = 'experience-' + i">
+          <div class="card-body p-3 border" [ngClass]="{'bg-light-primary text-primary': activeId === 'experience-' + i}">
+            <div class="d-flex justify-content-between align-items-center">
+              <h6 class="mb-0">{{ section.title }}</h6>
+              <button class="btn btn-sm btn-danger" (click)="remove(section)">
+                <span class="mdi mdi-close"></span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="card " *ngIf="activeId === 'experience-' + i">
+          <div class="card-body p-3 border">
+
+            <div class="row">
+              <div class="col-lg">
+                <div class="mb-3">
+                  <label for="inputExperienceSection{{i}}Icon" class="form-label">Icon</label>
+                  <input type="text" class="form-control" name="inputExperienceSection{{i}}Icon"
+                    id="inputExperienceSection{{i}}Icon" #inputExperienceSectionIcon="ngModel"
+                    [(ngModel)]="section.icon" required>
+                </div>
+              </div>
+              <div class="col-lg">
+                <div class="mb-3">
+                  <label for="inputExperienceSection{{i}}Title" class="form-label">Title</label>
+                  <input type="text" class="form-control" name="inputExperienceSection{{i}}Title"
+                    id="inputExperienceSection{{i}}Title" #inputExperienceSectionTitle="ngModel"
+                    [(ngModel)]="section.title" required>
+                </div>
+              </div>
+            </div>
+
+            <hr>
+
+            <div class="d-flex justify-content-between mb-3">
+              <h6>Items</h6>
+              <button class="btn btn-outline-dark btn-sm" (click)="section.add()">add</button>
+            </div>
+
+            <div class="px-4">
+              <ng-container *ngFor="let item of section.items; let i = index;">
+                <hr *ngIf="i > 0">
+                <div class="mb-3">
+                  <label for="inputItem{{i}}Title" class="form-label">Title</label>
+                  <input type="text" class="form-control" name="inputItem{{i}}Title" id="inputItem{{i}}Title"
+                    #inputProjectTitle="ngModel" [(ngModel)]="item.title" required>
+                </div>
+
+                <div class="mb-3">
+                  <label for="inputItem{{i}}Description" class="form-label">Description</label>
+                  <textarea class="form-control" name="inputItem{{i}}Description" id="inputItem{{i}}Description"
+                    #inputItemDescription="ngModel" [(ngModel)]="item.description" required rows="5"></textarea>
+                </div>
+              </ng-container>
+            </div>
+
+
+          </div>
+        </div>
+      </ng-container>
+    </div>
+
+    <hr>
+
+    <div class="d-flex justify-content-between mb-3">
+      <h6>Skills</h6>
+      <button class="btn btn-outline-dark btn-sm" (click)="add('skill')">add</button>
+    </div>
+
+    <div class="mb-4">
+      <ng-container *ngFor="let section of view.skillSections; let i = index">
+        <hr *ngIf="i > 0">
+
+        <div class="card mb-1 clickable" (click)="activeId === 'skill-' + i ? activeId = '' : activeId = 'skill-' + i">
+          <div class="card-body p-3 border" [ngClass]="{'bg-light-primary text-primary': activeId === 'skill-' + i}">
+            <div class="d-flex justify-content-between align-items-center">
+              <h6 class="mb-0">{{ section.title }}</h6>
+              <button class="btn btn-sm btn-danger" (click)="remove(section)">
+                <span class="mdi mdi-close"></span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="card " *ngIf="activeId === 'skill-' + i">
+          <div class="card-body p-3 border">
+
+            <div class="row">
+              <div class="col-lg">
+                <div class="mb-3">
+                  <label for="inputExperienceSection{{i}}Icon" class="form-label">Icon</label>
+                  <input type="text" class="form-control" name="inputExperienceSection{{i}}Icon"
+                    id="inputExperienceSection{{i}}Icon" #inputExperienceSectionIcon="ngModel"
+                    [(ngModel)]="section.icon" required>
+                </div>
+              </div>
+              <div class="col-lg">
+                <div class="mb-3">
+                  <label for="inputExperienceSection{{i}}Title" class="form-label">Title</label>
+                  <input type="text" class="form-control" name="inputExperienceSection{{i}}Title"
+                    id="inputExperienceSection{{i}}Title" #inputExperienceSectionTitle="ngModel"
+                    [(ngModel)]="section.title" required>
+                </div>
+              </div>
+            </div>
+
+            <hr>
+
+            <div class="d-flex justify-content-between mb-3">
+              <h6>Items</h6>
+              <button class="btn btn-outline-dark btn-sm" (click)="section.add()">add</button>
+            </div>
+
+            <div class="px-4">
+              <ng-container *ngFor="let item of section.items; let i = index;">
+                <hr *ngIf="i > 0">
+                <div class="mb-3">
+                  <label for="inputItem{{i}}Title" class="form-label">Title</label>
+                  <input type="text" class="form-control" name="inputItem{{i}}Title" id="inputItem{{i}}Title"
+                    #inputProjectTitle="ngModel" [(ngModel)]="item.title" required>
+                </div>
+
+                <div class="mb-3">
+                  <label for="inputItem{{i}}Description" class="form-label">Description</label>
+                  <textarea class="form-control" name="inputItem{{i}}Description" id="inputItem{{i}}Description"
+                    #inputItemDescription="ngModel" [(ngModel)]="item.description" required rows="5"></textarea>
+                </div>
+              </ng-container>
+            </div>
+
+
+          </div>
+        </div>
+      </ng-container>
+    </div>
+
+
+    <button class="btn btn-primary px-4" [disabled]="theForm.invalid || view.loading" (click)="save()">
+      Save
+    </button>
+  </form>
+
+</ng-container>

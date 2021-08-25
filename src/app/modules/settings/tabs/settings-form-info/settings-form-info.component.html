@@ -1,0 +1,163 @@
+<ng-container *ngIf="info && {
+  loading: loading$ | async
+} as view">
+
+  <app-loader *ngIf="view.loading"></app-loader>
+
+  <form #theForm="ngForm" *ngIf="!view.loading">
+
+    <div class="row">
+      <div class="col-lg">
+        <div class="mb-3">
+          <label for="inputFirstName" class="form-label">First Name</label>
+          <input type="text" class="form-control" name="inputFirstName" id="inputFirstName" #inputFirstName="ngModel"
+            [(ngModel)]="info.first_name" required>
+        </div>
+      </div>
+      <div class="col-lg">
+        <div class="mb-3">
+          <label for="inputLastName" class="form-label">First Name</label>
+          <input type="text" class="form-control" name="inputLastName" id="inputLastName" #inputLastName="ngModel"
+            [(ngModel)]="info.last_name" required>
+        </div>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="inputDescription" class="form-label">Bio</label>
+      <textarea class="form-control" name="inputDescription" id="inputDescription" #inputDescription="ngModel"
+        [(ngModel)]="info.description" rows="5"></textarea>
+    </div>
+
+    <div class="row">
+      <div class="col-lg">
+        <div class="mb-3">
+          <label for="inputEmail" class="form-label">Email Address</label>
+          <input type="text" class="form-control" name="inputEmail" id="inputEmail" #inputEmail="ngModel"
+            [(ngModel)]="info.email_address" required>
+        </div>
+      </div>
+      <div class="col-lg">
+        <div class="mb-3">
+          <label for="inputPhone" class="form-label">Phone Number</label>
+          <input type="text" class="form-control" name="inputPhone" id="inputPhone" #inputPhone="ngModel"
+            [(ngModel)]="info.phone_number" required>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="inputAddress" class="form-label">Address</label>
+      <input type="text" class="form-control" name="inputAddress" id="inputAddress" #inputAddress="ngModel"
+        [(ngModel)]="info.address" required>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-auto">
+        <div class="mb-3">
+          <label for="inputExperience" class="form-label">Working since</label>
+          <input type="date" class="form-control" name="inputExperience" id="inputExperience" #inputExperience="ngModel"
+            [(ngModel)]="info.workingSince" required>
+        </div>
+      </div>
+      <div class="col-lg">
+        <div class="mb-3">
+          <label for="inputCVLink" class="form-label">CV Link</label>
+          <input type="text" class="form-control" name="inputCVLink" id="inputCVLink" #inputPhone="ngModel"
+            [(ngModel)]="info.cv_link" required>
+        </div>
+      </div>
+    </div>
+
+
+    <hr>
+
+    <div class="d-flex justify-content-between mb-3">
+      <h6>Skills</h6>
+      <button class="btn btn-outline-dark btn-sm" (click)="info.addSkill()">add</button>
+    </div>
+
+    <div class="px-4">
+      <ng-container *ngFor="let skill of info.skills; let i = index">
+        <hr *ngIf="i > 0">
+        <div class="row">
+          <div class="col-lg-auto">
+            <div class="mb-3">
+              <label for="inputSkill{{i}}Icon" class="form-label">Icon</label>
+              <input type="text" class="form-control" name="inputSkill{{i}}Icon" id="inputSkill{{i}}Icon"
+                #inputSkillIcon="ngModel" [(ngModel)]="skill.icon" required>
+            </div>
+          </div>
+          <div class="col-lg">
+            <div class="mb-3">
+              <label for="inputSkill{{i}}Name" class="form-label">Name</label>
+              <input type="text" class="form-control" name="inputSkill{{i}}Name" id="inputSkill{{i}}Name"
+                #inputSkillName="ngModel" [(ngModel)]="skill.name" required>
+            </div>
+          </div>
+          <div class="col-lg">
+            <div class="mb-3">
+              <label for="inputSkill{{i}}Percent" class="form-label">Percentage</label>
+              <input type="number" class="form-control" name="inputSkill{{i}}Percent" id="inputSkill{{i}}Percent"
+                #inputSkillPercent="ngModel" [(ngModel)]="skill.percent" required>
+            </div>
+          </div>
+          <div class="col-lg-auto">
+            <div class="mb-3 pt-2 ">
+              <button class="btn btn-danger btn-sm mt-4" (click)="info.removeSkill(skill)">
+                <span class="mdi mdi-close"></span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+
+    <hr>
+
+    <div class="d-flex justify-content-between mb-3">
+      <h6>Social Links</h6>
+      <button class="btn btn-outline-dark btn-sm" (click)="info.addSocialItem()">add</button>
+    </div>
+
+    <div class="px-4">
+      <ng-container *ngFor="let item of info.social; let i = index">
+        <hr *ngIf="i > 0">
+        <div class="row">
+          <div class="col-lg-auto">
+            <div class="mb-3">
+              <label for="inputSoical{{i}}Icon" class="form-label">Icon</label>
+              <input type="text" class="form-control" name="inputSoical{{i}}Icon" id="inputSoical{{i}}Icon"
+                #inputSoicalIcon="ngModel" [(ngModel)]="item.icon" required>
+            </div>
+          </div>
+          <div class="col-lg">
+            <div class="mb-3">
+              <label for="inputSoical{{i}}Name" class="form-label">Name</label>
+              <input type="text" class="form-control" name="inputSoical{{i}}Name" id="inputSoical{{i}}Name"
+                #inputSoicalName="ngModel" [(ngModel)]="item.name" required>
+            </div>
+          </div>
+          <div class="col-lg">
+            <div class="mb-3">
+              <label for="inputSoical{{i}}Link" class="form-label">Link</label>
+              <input type="text" class="form-control" name="inputSoical{{i}}Link" id="inputSoical{{i}}Link"
+                #inputLinkName="ngModel" [(ngModel)]="item.link" required>
+            </div>
+          </div>
+          <div class="col-lg-auto">
+            <div class="mb-3 pt-2 ">
+              <button class="btn btn-danger btn-sm mt-4" (click)="info.removeSocialItem(item)">
+                <span class="mdi mdi-close"></span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+
+    <button class="btn btn-primary px-4" [disabled]="theForm.invalid || view.loading" (click)="save()">
+      Save
+    </button>
+  </form>
+
+</ng-container>

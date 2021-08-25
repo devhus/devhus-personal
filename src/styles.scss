@@ -1,1 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import './assets/scss/init.scss';
+@import './assets/fonts/poppins-font/import.css';
+@import './assets/fonts/materialdesignicons/materialdesignicons.scss';
+
+body {
+  font-family: 'Poppins', var(--dhs-font-sans-serif);
+  background: var(--dhs-dark);
+  color: var(--dhs-light);
+}
+
+.carousel-control-next-icon,
+.carousel-control-prev-icon {
+  background-color: #0000006e;
+  background-size: 1.25rem;
+}

@@ -1,0 +1,77 @@
+<ng-container *ngIf="{
+  loading: loading$ | async,
+  projects: projects$ | async
+} as view">
+
+  <app-loader *ngIf="view.loading" class="fullpage-loader"></app-loader>
+
+  <section class="portfolio fullscreen-section" id="portfolio" *ngIf="!view.loading && view.projects">
+    <div class="container">
+      <div class="content">
+        <div class="item-head center wow animate__zoomIn" data-wow-delay="0s">
+          <h4 class="subtitle"><span>/</span> PORTFOLIO</h4>
+          <h2 class="title"><span></span> Let's See Some Of My Work!</h2>
+        </div>
+
+        <div class="projects-list">
+          <div class="nav">
+            <ul>
+              <li class=" wow animate__zoomIn" data-wow-delay="0.3s" *ngFor="let category of categories | keyvalue">
+                <a class="btn  active portfolio-nav-button btn-block" [class.btn-dark]="category.key !== activeCategory"
+                  [class.btn-primary]="category.key === activeCategory"
+                  (click)="switchCategory(category.key)">{{category.value | titlecase}}</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="items row  wow animate__fadeIn" data-wow-delay="1s" style="visibility: hidden;">
+
+            <ng-container *ngFor="let project of view.projects; let itemIndex = index">
+
+              <div id="portfolio-item-{{itemIndex}}"
+                [class.show]="(['all'] | merge: project.categories) | includes: activeCategory"
+                class="col-xl-3 col-lg-4 col-md-6 mb-5 portfolio-nav-item">
+                <div class="card no-bg item ">
+                  <div class="item-image">
+                    <img [src]="project.images[0]" [alt]="project.name">
+                  </div>
+                  <div class="card-body item-body">
+                    <a routerLink="/portfolio/view/{{project.slug}}" class="icon project-link">
+                      <span class="mdi mdi-eye-outline"></span>
+                    </a>
+                    <p class="name">{{project.name}}</p>
+                    <h5 class="type">
+                      <span *ngFor="let category of project.categories; let i = index">
+                        <span *ngIf="i > 0">, </span> <span>{{categories[category]}}</span>
+                      </span>
+                    </h5>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+
+
+
+            <div
+              class="col-xl-3 col-lg-4 col-md-6 mb-5 portfolio-nav-item show portfolio-nav-category_web portfolio-nav-category_desktop portfolio-nav-category_design">
+              <div class="card no-bg item add-project ">
+                <div class="item-image">
+                  <span class="mdi mdi-plus big-icon"></span>
+                </div>
+                <div class="card-body item-body">
+                  <a href="javascript:void(0)" routerLink="/contact" class="icon project-link">
+                    <span class="mdi mdi-plus"></span>
+                  </a>
+                  <p class="name">Hire me to...</p>
+                  <h5 class="type">Add Your Project Here</h5>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</ng-container>

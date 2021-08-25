@@ -1,0 +1,18 @@
+<div class="loader-body" [ngClass]="{
+  'inline-body': inline === true,
+  'size-xl': size === 'xl',
+  'size-lg': size === 'lg',
+  'size-md': size === 'md',
+  'size-sm': size === 'sm'
+}">
+  <div class="spinner-border text-primary" [ngClass]="{
+    'spinner-border-xl': size === 'xl',
+    'spinner-border-lg': size === 'lg',
+    'spinner-border-md': size === 'md',
+    'spinner-border-sm': size === 'sm'
+  }">
+    
+  </div>
+  <!-- <span class="mdi mdi-spin mdi-loading load-icon"></span>
+  <span class="mdi mdi-checkbox-blank-circle-outline bg-icon"></span> -->
+</div>

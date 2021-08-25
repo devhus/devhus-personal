@@ -1,0 +1,156 @@
+<ng-container *ngIf="{
+  loading: loading$ | async
+} as view">
+
+  <app-loader *ngIf="view.loading"></app-loader>
+
+  <form #theForm="ngForm" *ngIf="!view.loading">
+
+    <div class="d-flex justify-content-between mb-3">
+      <h6>Projects</h6>
+      <button class="btn btn-outline-dark btn-sm" (click)="add()">add</button>
+    </div>
+
+    <div class="mb-4">
+      <ng-container *ngFor="let project of projects; let i = index">
+        <hr *ngIf="i > 0">
+
+        <div class="card mb-1 clickable" (click)="activeId === i ? activeId = -1 : activeId = i">
+          <div class="card-body p-3 border" [ngClass]="{'bg-light-primary text-primary': activeId === i}">
+            <div class="d-flex justify-content-between align-items-center">
+              <h6 class="mb-0">{{ project.name }}</h6>
+              <button class="btn btn-sm btn-danger" (click)="remove(project)">
+                <span class="mdi mdi-close"></span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="card " *ngIf="activeId === i">
+          <div class="card-body p-3 border">
+
+            <div class="row">
+              <div class="col-lg">
+                <div class="mb-3">
+                  <label for="inputProject{{i}}Name" class="form-label">Name</label>
+                  <input type="text" class="form-control" name="inputProject{{i}}Name" id="inputProject{{i}}Name"
+                    #inputProjectName="ngModel" [(ngModel)]="project.name" required>
+                </div>
+              </div>
+              <div class="col-lg">
+                <div class="mb-3">
+                  <label for="inputProject{{i}}Category" class="form-label">Category</label>
+                  <select class="form-select" name="inputProject{{i}}Category" id="inputProject{{i}}Category"
+                    #inputProjectCategory="ngModel" [(ngModel)]="project.category" required>
+                    <ng-container *ngFor="let category of categories | keyvalue">
+                      <option *ngIf="category.key !== 'all'" [value]="category.key">{{category.value}}</option>
+                    </ng-container>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="inputProject{{i}}Description" class="form-label">Description</label>
+              <textarea class="form-control" name="inputProject{{i}}Description" id="inputProject{{i}}Description"
+                #inputProjectDescription="ngModel" [(ngModel)]="project.description" required rows="5"></textarea>
+            </div>
+
+
+            <div class="row">
+              <div class="col-lg">
+                <div class="mb-3">
+                  <label for="inputProject{{i}}Client" class="form-label">Client's Name</label>
+                  <input type="text" class="form-control" name="inputProject{{i}}Client" id="inputProject{{i}}Client"
+                    #inputProjectClient="ngModel" [(ngModel)]="project.client" required>
+                </div>
+              </div>
+              <div class="col-lg">
+                <div class="mb-3">
+                  <label for="inputProject{{i}}DemoLink" class="form-label">Demo Link</label>
+                  <input type="text" class="form-control" name="inputProject{{i}}DemoLink"
+                    id="inputProject{{i}}DemoLink" #inputProjectDemoLink="ngModel" [(ngModel)]="project.demo_link"
+                    required>
+                </div>
+              </div>
+            </div>
+
+            <hr>
+
+            <div class="d-flex justify-content-between mb-3">
+              <h6>Languages</h6>
+              <button class="btn btn-outline-dark btn-sm" (click)="project.addLanguage()">add</button>
+            </div>
+
+            <div class="d-flex flex-wrap">
+              <ng-container *ngFor="let language of project.languages; let i = index; trackBy:project.trackBy">
+                <div class="mb-3 px-2 col-lg-4">
+                  <label for="inputLanguage{{i}}" class="form-label">Language {{i +1}}</label>
+                  <div class="input-group">
+                    <input type="text" id="inputLanguage{{i}}" class="form-control form-control-sm"
+                      name="inputLanguage{{i}}" #inputLanguage="ngModel" [(ngModel)]="project.languages[i]" required>
+                    <button class="btn btn-danger btn-sm" (click)="project.removeLanguage(language)">
+                      <span class="mdi mdi-close"></span>
+                    </button>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+
+            <hr>
+
+            <div class="d-flex justify-content-between mb-3">
+              <h6>Preview Images</h6>
+              <button class="btn btn-outline-dark btn-sm" (click)="project.addImage()">add</button>
+            </div>
+
+            <div class="d-flex flex-wrap">
+              <ng-container *ngFor="let image of project.images; let i = index; trackBy:project.trackBy">
+                <div class="mb-3 px-2 col-lg-4">
+                  <label for="inputImage{{i}}" class="form-label">Image {{i +1}}</label>
+                  <div class="input-group">
+                    <input type="text" class="form-control form-control-sm" name="inputImage{{i}}" id="inputImage{{i}}"
+                      #inputImage="ngModel" [(ngModel)]="project.images[i]" required>
+                    <button class="btn btn-danger btn-sm" (click)="project.removeImage(image)">
+                      <span class="mdi mdi-close"></span>
+                    </button>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+
+            <div class="d-flex justify-content-between mb-3">
+              <h6>Other Categories</h6>
+              <button class="btn btn-outline-dark btn-sm" (click)="project.addCategory()">add</button>
+            </div>
+
+            <div class="d-flex flex-wrap">
+              <ng-container *ngFor="let category of project.other_categories; let i = index; trackBy:project.trackBy">
+                <div class="mb-3 px-2 col-lg-4">
+                  <label for="inputOtherCategory{{i}}" class="form-label">Image {{i + 2}}</label>
+                  <div class="input-group">
+                    <select class="form-select" name="inputOtherCategory{{i}}" id="inputOtherCategory{{i}}"
+                      #inputOtherCategory="ngModel" [(ngModel)]="project.other_categories[i]" required>
+                      <ng-container *ngFor="let categoryOption of categories | keyvalue">
+                        <option *ngIf="categoryOption.key !== 'all'" [value]="categoryOption.key">{{categoryOption.value}}</option>
+                      </ng-container>
+                    </select>
+                    <button class="btn btn-danger btn-sm" (click)="project.removeCategory(category)">
+                      <span class="mdi mdi-close"></span>
+                    </button>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+
+          </div>
+        </div>
+      </ng-container>
+    </div>
+
+
+    <button class="btn btn-primary px-4" [disabled]="theForm.invalid || view.loading" (click)="save()">
+      Save
+    </button>
+  </form>
+
+</ng-container>

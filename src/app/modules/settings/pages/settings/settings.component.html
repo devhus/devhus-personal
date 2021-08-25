@@ -1,0 +1,50 @@
+<div class="container h-100">
+  <div class="d-flex w-100 h-100 align-items-center justify-content-center">
+    <div class="col-lg-8 h-100">
+      <div class="card h-100">
+        <div class="card-body">
+          <h4 class="mb-4">Settings</h4>
+
+          <app-loader *ngIf="settings.loading"></app-loader>
+
+          <ng-container *ngIf="!settings.loading && !settings.authed">
+            <label for="inputAccessToken" class="form-label">Access token</label>
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" name="inputAccessToken" id="inputAccessToken" #inputAccessToken="ngModel"
+                [(ngModel)]="settings.accessToken" required>
+              <button class="btn btn-primary" (click)="check()" [disabled]="settings.loading || inputAccessToken.invalid">Check!</button>
+            </div>
+          </ng-container>
+
+          <ng-container *ngIf="settings.authed">
+
+            <div class="flex flex-wrap mb-3">
+              <ng-container *ngFor="let tab of tabs">
+                <button class="btn px-4 me-3 mb-3" (click)="activeTab = tab" [ngClass]="{
+                  'btn-light-primary text-primary': tab !== activeTab,
+                  'btn-primary': tab === activeTab
+                }">
+                  {{tab | titlecase}}
+                </button>
+              </ng-container>
+            </div>
+
+
+            <div class="block-tabs">
+              <div class="tab" [class.d-none]="activeTab !== 'info'">
+                <app-settings-form-info></app-settings-form-info>
+              </div>
+              <div class="tab" [class.d-none]="activeTab !== 'resume'">
+                <app-settings-form-resume></app-settings-form-resume>
+              </div>
+              <div class="tab" [class.d-none]="activeTab !== 'projects'">
+                <app-settings-form-projects></app-settings-form-projects>
+              </div>
+            </div>
+          </ng-container>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

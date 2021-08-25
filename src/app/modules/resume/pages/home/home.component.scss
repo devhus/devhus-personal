@@ -1,0 +1,59 @@
+:host {
+  display: block;
+  min-height: 100vh;
+}
+
+.intro {
+  padding-bottom: 90px;
+
+  &::before {
+    content: "";
+    background: url("/../../../assets/image/intro_background.png") no-repeat top right;
+    background-size: contain;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+  }
+
+  .container {
+    z-index: 2;
+  }
+
+  .image-holder {
+    img {
+      height: 512px;
+    }
+  }
+
+  h1 {
+    font-weight: 700;
+
+  }
+}
+
+@media (max-width: 1200px) {
+  .intro {
+    &:not(.project_info) {
+      .image-holder {
+        display: none;
+      }
+    }
+
+    background: none;
+
+    &::before {
+      display: none !important;
+    }
+  }
+}
+
+@media (max-width: 986px) {
+  .intro {
+    h1 {
+      font-size: 4rem;
+    }
+  }
+}

@@ -1,0 +1,22 @@
+
+.card {
+  color: var(--dhs-dark);
+  background: none;
+  border: none;
+  border-radius: 0;
+
+  &.card-default-bg {
+    .card-body {
+      color: var(--dhs-light);
+      background-color: var(--dhs-primary);
+    }
+
+  }
+
+  .card-body {
+    position: relative;
+    z-index: 3;
+    background-color: var(--dhs-light);
+    padding: 44px;
+  }
+}

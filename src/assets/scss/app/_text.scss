@@ -1,0 +1,72 @@
+
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-bottom: 1rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.h1,
+h1 {
+  font-size: 4rem;
+}
+
+.h2,
+h2 {
+  font-size: 2rem;
+}
+
+a {
+  &:hover {
+    color: var(--dhs-primary);
+  }
+
+  color: var(--dhs-light);
+  -webkit-transition: all .3s ease-in-out;
+  transition: all .3s ease-in-out;
+  text-decoration: none;
+}
+
+
+.social-links {
+  display: flex;
+
+  &.dark {
+    a {
+      color: var(--dhs-dark);
+      border: 1px solid var(--dhs-dark);
+
+      &:hover {
+        color: var(--dhs-light);
+        border: 1px solid var(--dhs-dark);
+        background: var(--dhs-dark);
+      }
+    }
+  }
+
+  a {
+    color: var(--dhs-light);
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--dhs-light);
+    background: transparent;
+    margin: 0 4px;
+    cursor: pointer;
+
+    &:hover {
+      color: var(--dhs-dark);
+      border: 1px solid var(--dhs-light);
+      background: var(--dhs-light);
+
+    }
+  }
+}

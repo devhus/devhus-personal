@@ -1,0 +1,49 @@
+.form-control {
+  border-radius: 0;
+  box-shadow: none !important;
+
+  &:focus {
+    border-color: var(--dhs-primary);
+    outline: 0;
+  }
+}
+
+.form-group {
+  margin-bottom: 2rem;
+}
+
+
+.modern-input {
+  position: relative;
+
+  span {
+    position: absolute;
+    font-weight: 300;
+    padding: 0 8px;
+    top: 14px;
+    color: var(--dhs-light);
+    font-size: 1rem;
+    left: 8px;
+    z-index: 1;
+    border-radius: 8px;
+    transition: all 0.2s ease-in-out;
+  }
+
+  input,
+  textarea {
+    position: relative;
+    z-index: 2;
+  }
+
+  input:valid~span,
+  input:focus~span,
+  textarea:valid~span,
+  textarea:focus~span {
+    display: block;
+    font-size: 0.8rem;
+    background: var(--dhs-dark);
+    left: 10px;
+    top: -10px;
+    z-index: 3;
+  }
+}

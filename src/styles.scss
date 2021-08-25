@@ -2,7 +2,7 @@
 
 @import './assets/scss/init.scss';
 @import './assets/fonts/poppins-font/import.css';
-@import './assets/fonts/materialdesignicons/materialdesignicons.scss';
+@import '~@mdi/font/scss/materialdesignicons.scss';
 
 body {
   font-family: 'Poppins', var(--dhs-font-sans-serif);

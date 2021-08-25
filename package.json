@@ -31,6 +31,7 @@
     "@sweetalert2/ngx-sweetalert2": "^10.0.0",
     "animate.css": "^4.1.1",
     "body-parser": "^1.19.0",
+    "bootstrap": "^5.1.0",
     "cors": "^2.8.5",
     "domino": "^2.1.6",
     "express": "^4.15.2",

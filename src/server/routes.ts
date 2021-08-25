@@ -1,4 +1,5 @@
 import * as express from 'express';
+import { environment } from 'src/environments/environment';
 import { JsonDatabase } from './database.model';
 
 export const ApiRoutes = express.Router();
@@ -52,15 +53,15 @@ ApiRoutes.post('/contact', (req, res) => {
   }
 
   const transporter = nodemailer.createTransport({
-    service: 'gmail',
+    service: environment.nodemailer.service,
     auth: {
-      user: 'mr2hossam@gmail.com',
-      pass: 'nqvwcaeumwwxqbik'
+      user: environment.nodemailer.user,
+      pass: environment.nodemailer.pass
     }
   });
   const mailOptions = {
     from: req.body.email,
-    to: 'mr2hossam@gmail.com',
+    to: environment.nodemailer.receiver_email,
     subject: `[devhus.com] ${req.body.subject}`,
     html: `<b>From:<b>${req.body.email}<br><b>Subject:<b>${req.body.subject}<br><b>Message:<b>${req.body.message}<br>`
   };

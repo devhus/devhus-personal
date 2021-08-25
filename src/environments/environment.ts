@@ -8,6 +8,13 @@ export const environment = {
   appVersion: 'devhus_v1',
   appUrl: "http://localhost:4200",
   apiUrl: 'http://localhost:4000/api',
+
+  nodemailer: {
+    service: 'gmail',
+    user: 'youremail@gmail.com',
+    pass: 'your_pass',
+    receiver_email: 'receiver@gmail.com'
+  }
 };
 
 /*

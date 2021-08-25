@@ -32,7 +32,7 @@ export function app(): express.Express {
     origin: [environment.appUrl, environment.appUrl.replace('://', '://www.')],
     credentials: false
   }));
-  
+
   const bodyParser = require('body-parser');
 
   // parse application/json
@@ -72,7 +72,7 @@ export function app(): express.Express {
         return;
       }
     }
-    delete(req.body['access_token']);
+    delete (req.body['access_token']);
     next()
   });
   server.use('/api', ApiRoutes);
@@ -122,8 +122,8 @@ function run(): void {
   //   console.log(`Node Express server listening on http://localhost:${port}`);
   // });
 
-  const listener = server.listen(environment.production ? sock : port, () => {
-    if (environment.production) {
+  const listener = server.listen(environment.ssr.node_server_hanlder === 'sock' ? sock : port, () => {
+    if (environment.ssr.node_server_hanlder === 'sock') {
       chmodSync(sock, '0777');
       console.log(`Node Express server listening on ${sock}`);
     } else {

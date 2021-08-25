@@ -5,14 +5,14 @@
 export const environment = {
   production: false,
 
-  appVersion: 'devhus_v1',
-  appUrl: "http://localhost:4200",
-  apiUrl: 'http://localhost:4000/api',
+  appVersion: 'devhus_v1', //<-- Your app version
+  appUrl: "http://localhost:4200", //<-- where the app will be running, including path folders with the domain
+  apiUrl: 'http://localhost:4000/api', //<-- where the API will be running, including path folders with the domain. if you're using Angular Universal feature built within the app the apiUrl likely is gonna be appUrl+'/api'
 
   ssr:{
-    node_server_hanlder: 'port'
+    node_server_hanlder: 'port' //<-- sock or port, in case your nodeJS server is running using sock make this 'sock'
   },
-  
+
   nodemailer: {
     service: 'gmail',
     user: 'youremail@gmail.com',
